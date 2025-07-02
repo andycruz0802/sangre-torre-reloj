@@ -1,0 +1,14 @@
+<div class="main">
+  <div class="tablero" #tablero>
+    <div
+      *ngFor="let pieza of piezas"
+      class="pieza"
+      cdkDrag
+      [cdkDragBoundary]="tablero"
+      [cdkDragFreeDragPosition]="{ x: pieza.x, y: pieza.y }"
+      (cdkDragEnded)="onDragEnded($event, pieza)"
+    >
+      <img src="../../../assets/img/roles/{{ pieza.img }}.png" />
+    </div>
+  </div>
+</div>
