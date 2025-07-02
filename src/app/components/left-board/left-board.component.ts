@@ -7,6 +7,7 @@ export interface Pieza {
   img: string;
   x: number;
   y: number;
+  show?: boolean;
 }
 
 @Component({
@@ -17,7 +18,7 @@ export interface Pieza {
 export class LeftBoardComponent implements OnInit {
   public piezas: Pieza[] = [
     { priority: 1, nombre: 'Bibliotecario', x: 0, y: 0, img: 'bibliotecario' },
-    { priority: 2, nombre: 'Lavandera', x: 100, y: 100, img: 'lavandera' },
+    { priority: 2, nombre: 'Lavandera', x: 0, y: 0, img: 'lavandera' },
   ];
 
   constructor() {}
