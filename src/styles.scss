@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Gothic";
+  src: url("./assets/fonts/IMFellEnglishSC-Regular.ttf") format("truetype");
+  /* Si tienes TTF también puedes añadir:
+  src: url('/assets/fonts/PirataOne-Regular.ttf') format('truetype');
+  */
+  font-weight: normal;
+  font-style: normal;
+}

@@ -6,11 +6,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LeftBoardComponent } from './components/left-board/left-board.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ButtonToggleComponent } from './components/left-board/shared/button-toggle/button-toggle.component';
-
+import { SectionPreparacionComponent } from './components/section-preparacion/section-preparacion.component';
+import { SectionNightOrderComponent } from './components/section-night-order/section-night-order.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
-  declarations: [AppComponent, LeftBoardComponent, ButtonToggleComponent],
+  declarations: [
+    AppComponent,
+    LeftBoardComponent,
+    ButtonToggleComponent,
+    SectionPreparacionComponent,
+    SectionNightOrderComponent,
+  ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     DragDropModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
