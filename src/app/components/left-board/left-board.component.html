@@ -1,14 +1,31 @@
 <div class="main">
+  <app-button-toggle
+    [check]="isEditMode"
+    (onCheckChanged)="isEditMode = !isEditMode"
+  ></app-button-toggle>
   <div class="tablero" #tablero>
+    <div *ngIf="isEditMode" class="grid-overlay"></div>
     <div
-      *ngFor="let pieza of piezas"
+      *ngFor="let pieza of getVisiblesPiezas()"
       class="pieza"
       cdkDrag
+      [cdkDragDisabled]="!isEditMode"
       [cdkDragBoundary]="tablero"
       [cdkDragFreeDragPosition]="{ x: pieza.x, y: pieza.y }"
       (cdkDragEnded)="onDragEnded($event, pieza)"
+      (contextmenu)="isEditMode && onRightClick($event, pieza)"
+      (mousedown)="isEditMode && onMouseDown($event, pieza)"
+      (mouseup)="isEditMode && onMouseUp()"
+      (mouseleave)="isEditMode && onMouseUp()"
     >
       <img src="../../../assets/img/roles/{{ pieza.img }}.png" />
+      <button
+        *ngIf="pieza.showDelete"
+        class="delete-btn"
+        (click)="removePieza(pieza)"
+      >
+        x
+      </button>
     </div>
   </div>
 </div>
