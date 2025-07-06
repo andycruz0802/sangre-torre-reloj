@@ -1,8 +1,124 @@
-<div class="main">
-  <div class="players">
-    <label for=""
-      >Ingrese el nombre de los jugadores separados por una coma (,)</label
+<mat-stepper
+  linear
+  class="example-stepper"
+  [orientation]="(stepperOrientation | async)!"
+>
+  <mat-step [stepControl]="firstFormGroup" label="Jugadores">
+    <form [formGroup]="firstFormGroup">
+      <mat-form-field class="form-field-50">
+        <mat-label>Jugadores separados por coma (,)</mat-label>
+        <textarea
+          matInput
+          name="questionText"
+          cols="45"
+          rows="5"
+          formControlName="players"
+          placeholder="Jugadores"
+          required
+          (ngModelChange)="onWritePlayer()"
+        ></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext (click)="nextPlayers()">
+          Siguiente
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step
+    [stepControl]="secondFormGroup"
+    label="Selecciona los roles jugables"
+  >
+    <form [formGroup]="secondFormGroup">
+      <h1>
+        Selecciona un total de
+        {{ singletonService.getTotalNumberOfPlayers() }} roles
+      </h1>
+      <div
+        class="roles"
+        *ngFor="let rol of singletonService.getRolesPorClase()"
+      >
+        <h2>{{ rol.clase }}</h2>
+        <div class="lista-imagenes">
+          <div
+            class="imagen-wrapper"
+            *ngFor="let pieza of rol.piezas"
+            [class.grey-scale]="
+              (maxReached() && !pieza.selected) || !pieza.playable
+            "
+          >
+            <img
+              [src]="'../../../assets/img/roles/' + pieza.img + '.png'"
+              [alt]="pieza.nombre"
+              class="imagen-rol"
+              (click)="toggleSeleccion(pieza)"
+            />
+            <div class="check-overlay" *ngIf="pieza.selected">✓</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step label="Cada jugador obtiene su rol">
+    <!-- <form > -->
+
+    <div *ngIf="currentPlayerIndex < players.length" class="obtain-roles">
+      <ng-container
+        *ngIf="players[currentPlayerIndex].rol; else currentUserNotHasRol"
+      >
+        <ng-container *ngTemplateOutlet="currentUserHasRol"></ng-container>
+      </ng-container>
+    </div>
+
+    <div *ngIf="currentPlayerIndex >= players.length">
+      <h2>¡Todos los jugadores tienen su rol asignado!</h2>
+      <button mat-raised-button color="primary" (click)="goToGrimoire()">
+        Continuar
+      </button>
+    </div>
+  </mat-step>
+</mat-stepper>
+
+<ng-template #currentUserHasRol>
+  <h2>
+    <span class="red-text">{{ players[currentPlayerIndex].name }}</span
+    >, tu rol es...
+  </h2>
+
+  <div>
+    <img
+      [src]="
+        '../../../assets/img/roles/' +
+        players[currentPlayerIndex].rol?.img +
+        '.png'
+      "
+      [alt]="players[currentPlayerIndex].rol?.img"
+      class="show-imagen-rol"
+    />
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="goToNextPlayerToGetRol()"
     >
-    <textarea name="" id="" [value]="players"></textarea>
+      {{
+        currentPlayerIndex >= players.length - 1
+          ? "Finalizar"
+          : "Siguiente jugador"
+      }}
+    </button>
   </div>
-</div>
+</ng-template>
+<ng-template #currentUserNotHasRol>
+  <h2>
+    <span class="red-text">{{ players[currentPlayerIndex].name }}</span
+    >, pulsa el botón para ver tu rol:
+  </h2>
+
+  <button mat-raised-button color="primary" (click)="asignarRol()">
+    Ver mi rol
+  </button>
+</ng-template>

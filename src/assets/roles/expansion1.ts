@@ -1,3 +1,5 @@
+type Clase = 'Aldeanos' | 'Forasteros' | 'Esbirros' | 'Demonios';
+
 export class Pieza {
   priority: number = 0;
   nombre: string = '';
@@ -5,8 +7,10 @@ export class Pieza {
   x: number = 0;
   y: number = 0;
   visible: boolean = true;
+  clase: Clase = 'Aldeanos';
   showDelete?: boolean = false;
   playable?: boolean = true;
+  selected?: boolean = false;
 
   constructor(init?: Partial<Pieza>) {
     Object.assign(this, init);
@@ -15,7 +19,14 @@ export class Pieza {
 
 export const ALL_ROLES_1ST_EXP: Pieza[] = [
   new Pieza({ priority: 0, nombre: 'Alcalde', img: 'alcalde', x: 0, y: 0 }),
-  new Pieza({ priority: 0, nombre: 'Baron', img: 'baron', x: 0, y: 0 }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Barón',
+    img: 'baron',
+    x: 0,
+    y: 0,
+    clase: 'Esbirros',
+  }),
   new Pieza({
     priority: 0,
     nombre: 'Bibliotecario',
@@ -30,9 +41,17 @@ export const ALL_ROLES_1ST_EXP: Pieza[] = [
     x: 0,
     y: 0,
     playable: false,
+    clase: 'Forasteros',
   }),
   new Pieza({ priority: 0, nombre: 'Chef', img: 'chef', x: 0, y: 0 }),
-  new Pieza({ priority: 0, nombre: 'Diablillo', img: 'diablillo', x: 0, y: 0 }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Diablillo',
+    img: 'diablillo',
+    x: 0,
+    y: 0,
+    clase: 'Demonios',
+  }),
   new Pieza({ priority: 0, nombre: 'Empatico', img: 'empatico', x: 0, y: 0 }),
   new Pieza({
     priority: 0,
@@ -47,42 +66,72 @@ export const ALL_ROLES_1ST_EXP: Pieza[] = [
     img: 'envenenador',
     x: 0,
     y: 0,
+    clase: 'Esbirros',
   }),
-  // new Pieza({ priority: 0, nombre: 'Espia', img: 'espia', x: 0, y: 0 }),
-  // new Pieza({
-  //   priority: 0,
-  //   nombre: 'Exterminador',
-  //   img: 'exterminador',
-  //   x: 0,
-  //   y: 0,
-  // }),
-  // new Pieza({
-  //   priority: 0,
-  //   nombre: 'Guardiancuervos',
-  //   img: 'guardiancuervos',
-  //   x: 0,
-  //   y: 0,
-  // }),
-  // new Pieza({
-  //   priority: 0,
-  //   nombre: 'Investigador',
-  //   img: 'investigador',
-  //   x: 0,
-  //   y: 0,
-  // }),
-  // new Pieza({ priority: 0, nombre: 'Lavandera', img: 'lavandera', x: 0, y: 0 }),
-  // new Pieza({ priority: 0, nombre: 'Mayordomo', img: 'mayordomo', x: 0, y: 0 }),
-  // new Pieza({ priority: 0, nombre: 'Monje', img: 'monje', x: 0, y: 0 }),
-  // new Pieza({
-  //   priority: 0,
-  //   nombre: 'Mujerescarlata',
-  //   img: 'mujerescarlata',
-  //   x: 0,
-  //   y: 0,
-  // }),
-  // new Pieza({ priority: 0, nombre: 'Pitonisa', img: 'pitonisa', x: 0, y: 0 }),
-  // new Pieza({ priority: 0, nombre: 'Recluso', img: 'recluso', x: 0, y: 0 }),
-  // new Pieza({ priority: 0, nombre: 'Santo', img: 'santo', x: 0, y: 0 }),
-  // new Pieza({ priority: 0, nombre: 'Soldado', img: 'soldado', x: 0, y: 0 }),
-  // new Pieza({ priority: 0, nombre: 'Virgen', img: 'virgen', x: 0, y: 0 }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Espía',
+    img: 'espia',
+    x: 0,
+    y: 0,
+    clase: 'Esbirros',
+  }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Exterminador',
+    img: 'exterminador',
+    x: 0,
+    y: 0,
+  }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Guardiancuervos',
+    img: 'guardiancuervos',
+    x: 0,
+    y: 0,
+  }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Investigador',
+    img: 'investigador',
+    x: 0,
+    y: 0,
+  }),
+  new Pieza({ priority: 0, nombre: 'Lavandera', img: 'lavandera', x: 0, y: 0 }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Mayordomo',
+    img: 'mayordomo',
+    x: 0,
+    y: 0,
+    clase: 'Forasteros',
+  }),
+  new Pieza({ priority: 0, nombre: 'Monje', img: 'monje', x: 0, y: 0 }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Mujer escarlata',
+    img: 'mujerescarlata',
+    x: 0,
+    y: 0,
+    clase: 'Esbirros',
+  }),
+  new Pieza({ priority: 0, nombre: 'Pitonisa', img: 'pitonisa', x: 0, y: 0 }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Recluso',
+    img: 'recluso',
+    x: 0,
+    y: 0,
+    clase: 'Forasteros',
+  }),
+  new Pieza({
+    priority: 0,
+    nombre: 'Santo',
+    img: 'santo',
+    x: 0,
+    y: 0,
+    clase: 'Forasteros',
+  }),
+  new Pieza({ priority: 0, nombre: 'Soldado', img: 'soldado', x: 0, y: 0 }),
+  new Pieza({ priority: 0, nombre: 'Virgen', img: 'virgen', x: 0, y: 0 }),
 ];

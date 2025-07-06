@@ -1,28 +1,41 @@
 :host {
-  .accordion {
-    margin: 8px 0;
-    border-radius: 12px;
+  .main {
+    padding: 16px;
 
-    &-header {
+    .accordion {
+      margin: 8px 0;
       border-radius: 12px;
-      font-family: "Gothic";
-      padding: 12px;
-      background: #868484;
-      color: white;
-      font-size: 26px;
-      cursor: pointer;
-      user-select: none;
-    }
 
-    &-content {
-      margin-left: 20px;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-      &.opened {
-        max-height: 100%; /* un valor grande para permitir expandirse */
-        opacity: 1;
+      .accordion-header.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .check {
+        color: green;
+        margin-left: 8px;
+      }
+
+      &-header {
+        border-radius: 12px;
+        font-family: "Gothic";
+        padding: 12px;
+        background: #868484;
+        color: white;
+        font-size: 26px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      &-content {
+        margin-left: 20px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+        &.opened {
+          max-height: 100%; /* un valor grande para permitir expandirse */
+          opacity: 1;
+        }
       }
     }
   }

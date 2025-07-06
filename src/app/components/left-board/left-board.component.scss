@@ -10,6 +10,22 @@
       position: relative; /* Necesario para que el drag boundary funcione bien */
       .pieza {
         position: absolute; /* Para que funcione el free drag */
+        .name {
+          position: absolute;
+          left: 50%;
+          top: 4px;
+          transform: translateX(-50%);
+          z-index: 100;
+          text-transform: uppercase;
+          font-family: "Gothic";
+          font-weight: bold;
+          font-size: 18px;
+          background-color: #333333;
+          color: white;
+          border-radius: 4px;
+          padding: 2px 4px;
+          user-select: none;
+        }
         img {
           user-select: none;
           filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.5));

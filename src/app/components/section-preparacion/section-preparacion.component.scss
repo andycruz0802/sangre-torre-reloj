@@ -1,0 +1,53 @@
+:host {
+  .form-field-50 {
+    width: 50%;
+  }
+
+  .lista-imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    gap: 10px;
+
+    .grey-scale {
+      opacity: 0.4;
+      filter: grayscale(100%);
+      pointer-events: none; /* opcional si quieres que no se puedan clicar */
+    }
+
+    .imagen-wrapper {
+      position: relative;
+      display: inline-block;
+
+      .imagen-rol {
+        width: 100px;
+        height: auto;
+        cursor: pointer;
+      }
+
+      .check-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(0, 128, 0, 0.7); /* fondo verde traslúcido */
+        color: white;
+        font-size: 24px;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        line-height: 24px;
+      }
+    }
+  }
+
+  .obtain-roles {
+    .red-text {
+      color: red;
+    }
+    .show-imagen-rol {
+      width: 220px;
+      height: auto;
+    }
+  }
+}
